@@ -1,3 +1,2 @@
 #!/bin/bash
-IFS='.' read -r ip1 ip2 ip3 ip4 <<< "$1" && IFS='.' read -r m1 m2 m3 m4 <<< "$2"
-printf "%d.%d.%d.%d\n" "$((ip1 & m1))" "$((ip2 & m2))" "$((ip3 & m3))" "$((ip4 & m4))"
+IFS='.' read -r -a ip <<< "$1" && IFS='.' read -r -a mask <<< "$2" && printf "%d.%d.%d.%d\n" "$((ip[0] & mask[0]))" "$((ip[1] & mask[1]))" "$((ip[2] & mask[2]))" "$((ip[3] & mask[3]))"
