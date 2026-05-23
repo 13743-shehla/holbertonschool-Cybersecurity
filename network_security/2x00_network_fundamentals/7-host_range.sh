@@ -1,0 +1,2 @@
+#!/bin/bash
+IFS='.' read -r i1 i2 i3 i4 <<< "$1"; mask=$(( 0xFFFFFFFF << (32-$2) & 0xFFFFFFFF )); ip=$(( (i1<<24)|(i2<<16)|(i3<<8)|i4 )); net=$(( ip & mask )); bcast=$(( net | (~mask & 0xFFFFFFFF) )); printf "%d.%d.%d.%d - %d.%d.%d.%d" $(( (net>>24)&255 )) $(( (net>>16)&255 )) $(( (net>>8)&255 )) $(( (net+1)&255 )) $(( (bcast>>24)&255 )) $(( (bcast>>16)&255 )) $(( (bcast>>8)&255 )) $(( (bcast-1)&255 ))
