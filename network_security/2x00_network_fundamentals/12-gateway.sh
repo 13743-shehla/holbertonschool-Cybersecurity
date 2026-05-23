@@ -1,2 +1,2 @@
 #!/bin/bash
-ip route | grep -oP 'default via \K[\d.]+'
+ip route show | awk '/default/ {print $3}'
