@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "$1" | awk -F'.' -v mask="$2" 'BEGIN{split(mask,m,".")}{printf "%d.%d.%d.%d\n", or($1,xor(m[1],255)), or($2,xor(m[2],255)), or($3,xor(m[3],255)), or($4,xor(m[4],255))}'
+IFS='.' read -r i1 i2 i3 i4 <<< "$1"; IFS='.' read -r m1 m2 m3 m4 <<< "$2"
+echo "$(( i1 | (255 & ~m1) )).$(( i2 | (255 & ~m2) )).$(( i3 | (255 & ~m3) )).$(( i4 | (255 & ~m4) ))"
