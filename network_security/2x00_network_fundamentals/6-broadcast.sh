@@ -1,2 +1,2 @@
 #!/bin/bash
-IFS='.' read -r -a ip <<< "$1" && IFS='.' read -r -a m <<< "$2" && printf "%d.%d.%d.%d\n" "$((ip[0] | (255 - m[0])))" "$((ip[1] | (255 - m[1])))" "$((ip[2] | (255 - m[2])))" "$((ip[3] | (255 - m[3])))"
+echo "$1" | awk -F'.' -v mask="$2" 'BEGIN{split(mask,m,".")}{printf "%d.%d.%d.%d\n", or($1,xor(m[1],255)), or($2,xor(m[2],255)), or($3,xor(m[3],255)), or($4,xor(m[4],255))}'
