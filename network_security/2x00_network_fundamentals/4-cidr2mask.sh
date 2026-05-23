@@ -1,2 +1,3 @@
 #!/bin/bash
-mask=$(( 0xFFFFFFFF << (32 - $1) )) && printf "%d.%d.%d.%d\n" $(( (mask >> 24) & 255 )) $(( (mask >> 16) & 255 )) $(( (mask >> 8) & 255 )) $(( mask & 255 ))
+cdr=$1
+printf "%d.%d.%d.%d\n" "$(( (0xFFFFFFFF << (32 - cdr)) >> 24 & 0xFF ))" "$(( (0xFFFFFFFF << (32 - cdr)) >> 16 & 0xFF ))" "$(( (0xFFFFFFFF << (32 - cdr)) >> 8 & 0xFF ))" "$(( (0xFFFFFFFF << (32 - cdr)) & 0xFF ))"
